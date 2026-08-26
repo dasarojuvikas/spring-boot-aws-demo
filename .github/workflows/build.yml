@@ -37,6 +37,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           source: "target/aws-application-0.0.1-SNAPSHOT.jar"
           target: "/home/ec2-user/"
+          overwrite: true
 
       - name: Verify JAR on EC2
         uses: appleboy/ssh-action@v1
