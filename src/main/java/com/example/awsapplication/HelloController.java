@@ -8,6 +8,6 @@ public class HelloController {
 
     @GetMapping("/hello")
     public String hello() {
-        return "The Real Aws deployment is working!";
+        return "The Real Aws deployment is working! yes";
     }
 }
