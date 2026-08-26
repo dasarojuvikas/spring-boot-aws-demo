@@ -6,11 +6,7 @@ on:
       - main
 
 jobs:
-
-  # =========================
-  # CI - BUILD
-  # =========================
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,29 +22,6 @@ jobs:
           cache: maven
 
       - name: Build with Maven
-        run: mvn clean package
-
-
-  # =========================
-  # CD - DEPLOY
-  # =========================
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Java 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: maven
-
-      - name: Build JAR
         run: mvn clean package
 
       - name: Stop application and remove old JAR
