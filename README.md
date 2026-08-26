@@ -6,6 +6,7 @@ Simple Spring Boot REST API for deployment on AWS EC2.
 
 GET /hello
 
+
 Response:
 
 hello spring boot
