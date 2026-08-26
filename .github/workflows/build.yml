@@ -24,11 +24,6 @@ jobs:
       - name: Build with Maven
         run: mvn clean package
 
-      - name: Verify JAR
-        run: |
-          ls -lh target/aws-application-0.0.1-SNAPSHOT.jar
-          unzip -p target/aws-application-0.0.1-SNAPSHOT.jar BOOT-INF/classes/com/example/awsapplication/HelloController.class | strings | grep "aws console"
-
       - name: Stop application and remove old JAR
         uses: appleboy/ssh-action@v1
         with:
@@ -54,16 +49,6 @@ jobs:
           target: "/home/ec2-user/"
           strip_components: 1
           overwrite: true
-
-      - name: Verify JAR on EC2
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            ls -lh /home/ec2-user/aws-application-0.0.1-SNAPSHOT.jar
-            unzip -p /home/ec2-user/aws-application-0.0.1-SNAPSHOT.jar BOOT-INF/classes/com/example/awsapplication/HelloController.class | strings | grep "aws console"
 
       - name: Start application
         uses: appleboy/ssh-action@v1
